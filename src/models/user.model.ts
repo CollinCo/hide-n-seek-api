@@ -7,17 +7,22 @@ export class User extends Entity {
         type: 'number',
         id: true,
     })
-    id?: number;
+    uid?: number;
 
     @property({
         type: 'string',
     })
-    firstname: number;
+    username: string;
 
     @property({
         type: 'string',
     })
-    lastname: number;
+    firstname: string;
+
+    @property({
+        type: 'string',
+    })
+    lastname: string;
 
     @property({
         type: 'string',
@@ -30,6 +35,18 @@ export class User extends Entity {
         required: true,
     })
     password: string;
+
+    @property({
+        type: 'number',
+
+    })
+    lng: number;
+
+    @property({
+        type: 'number',
+
+    })
+    lat: number;
 
     getId() {
         return this.id;
