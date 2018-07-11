@@ -9,32 +9,31 @@ export class RegistrationController {
 
   @post('/registration')
   async registerUser(@requestBody() user: User) {
-    // Check that required fields are supplied
-    if (!user.email || !user.password) {
-      throw new HttpErrors.BadRequest('missing data');
-    }
+    // let regUser = new User();
+    // regUser.firstname = user.firstname;
+    // regUser.lastname = user.lastname;
+    // regUser.email = user.email;
 
-    // Check that user does not already exist
-    let userExists: boolean = !!(await this.userRepo.count({
-      email: user.email,
-    }));
+    // regUser.password = user.password;
 
-    if (userExists) {
-      throw new HttpErrors.BadRequest('user already exists');
-    }
+    // let createdUser = await this.userRepo.create(regUser);
+    // let jwt = sign(
+    //   {
+    //     user: {
+    //       id: createdUser.uid,
+    //       email: createdUser.email
+    //     },
+    //   },
+    //   'shh',
+    //   {
+    //     issuer: 'auth.ix.com',
+    //     audience: 'ix.com',
+    //   },
+    // );
 
-    let createdUser = await this.userRepo.create(user);
-
-    let jwt = sign({
-      user: createdUser
-    },
-      'shh', {
-        issuer: 'auth.hns.co.za',
-        audience: 'hns.co.za'
-      });
-
-    return {
-      token: jwt
-    };
+    // return {
+    //   token: jwt,
+    // };
+    return await this.userRepo.create(user);
   }
 }

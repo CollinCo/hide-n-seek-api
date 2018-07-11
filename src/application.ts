@@ -39,9 +39,9 @@ export class Day_6Application extends BootMixin(
       connector: 'loopback-connector-mysql',
       host: 'localhost',
       port: 3306,
-      database: 'project',
+      database: 'hide_n_seek',
       user: 'root',
-      password: ''
+      password: 'root1234'
     });
     this.dataSource(dataSourceConfig);
   }
