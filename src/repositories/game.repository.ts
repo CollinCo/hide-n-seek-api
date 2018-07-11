@@ -4,7 +4,7 @@ import { inject } from '@loopback/core';
 
 export class GameRepository extends DefaultCrudRepository<
   Game,
-  typeof User.prototype.id
+  typeof Game.prototype.id
   > {
   constructor(
     @inject('datasources.db') protected datasource: juggler.DataSource,

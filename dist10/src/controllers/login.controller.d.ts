@@ -1,7 +1,10 @@
 import { UserRepository } from '../repositories/user.repository';
 import { User } from '../models';
-export declare class RegistrationController {
+export declare class LoginController {
     protected userRepo: UserRepository;
     constructor(userRepo: UserRepository);
-    registerUser(user: User): Promise<User>;
+    verifyToken(jwt: string): string | object;
+    loginUser(user: User): Promise<{
+        token: string;
+    }>;
 }
