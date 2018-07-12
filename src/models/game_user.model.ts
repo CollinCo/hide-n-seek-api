@@ -29,13 +29,13 @@ export class GameUserMap extends Entity {
     type: 'number',
 
   })
-  lng: number;
+  lng?: number;
 
   @property({
     type: 'number',
 
   })
-  lat: number;
+  lat?: number;
 
   @property({
     type: 'number',

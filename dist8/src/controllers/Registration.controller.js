@@ -16,34 +16,32 @@ const repository_1 = require("@loopback/repository");
 const user_repository_1 = require("../repositories/user.repository");
 const models_1 = require("../models");
 const rest_1 = require("@loopback/rest");
+const jsonwebtoken_1 = require("jsonwebtoken");
 let RegistrationController = class RegistrationController {
     constructor(userRepo) {
         this.userRepo = userRepo;
     }
     async registerUser(user) {
-        // let regUser = new User();
-        // regUser.firstname = user.firstname;
-        // regUser.lastname = user.lastname;
-        // regUser.email = user.email;
-        // regUser.password = user.password;
-        // let createdUser = await this.userRepo.create(regUser);
-        // let jwt = sign(
-        //   {
-        //     user: {
-        //       id: createdUser.uid,
-        //       email: createdUser.email
-        //     },
-        //   },
-        //   'shh',
-        //   {
-        //     issuer: 'auth.ix.com',
-        //     audience: 'ix.com',
-        //   },
-        // );
-        // return {
-        //   token: jwt,
-        // };
-        return await this.userRepo.create(user);
+        let regUser = new models_1.User();
+        regUser.firstname = user.firstname;
+        regUser.lastname = user.lastname;
+        regUser.email = user.email;
+        regUser.username = user.username;
+        regUser.password = user.password;
+        let createdUser = await this.userRepo.create(regUser);
+        let jwt = jsonwebtoken_1.sign({
+            user: {
+                id: createdUser.uid,
+                email: createdUser.email
+            },
+        }, 'shh', {
+            issuer: 'auth.ix.com',
+            audience: 'ix.com',
+        });
+        return {
+            token: jwt,
+        };
+        // return await this.userRepo.create(user);
     }
 };
 __decorate([

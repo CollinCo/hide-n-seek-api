@@ -50,12 +50,12 @@ exports.up = function (db, callback) {
     lng: {
       type: 'int',
       length: 45,
-      notNull: true,
+
     },
     lat: {
       type: 'int',
       length: 45,
-      notNull: true,
+
     },
     role: {
       type: 'string',
@@ -71,7 +71,7 @@ exports.up = function (db, callback) {
 };
 
 exports.down = function (db, callback) {
-  db.dropTable('game_user_table', callback)
+  db.dropTable('game_user_map', callback)
 };
 
 exports._meta = {

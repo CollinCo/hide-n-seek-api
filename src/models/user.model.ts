@@ -40,13 +40,13 @@ export class User extends Entity {
         type: 'number',
 
     })
-    lng: number;
+    lng?: number;
 
     @property({
         type: 'number',
 
     })
-    lat: number;
+    lat?: number;
 
     getId() {
         return this.id;

@@ -9,31 +9,31 @@ export class RegistrationController {
 
   @post('/registration')
   async registerUser(@requestBody() user: User) {
-    // let regUser = new User();
-    // regUser.firstname = user.firstname;
-    // regUser.lastname = user.lastname;
-    // regUser.email = user.email;
+    let regUser = new User();
+    regUser.firstname = user.firstname;
+    regUser.lastname = user.lastname;
+    regUser.email = user.email;
+    regUser.username = user.username
+    regUser.password = user.password;
 
-    // regUser.password = user.password;
+    let createdUser = await this.userRepo.create(regUser);
+    let jwt = sign(
+      {
+        user: {
+          id: createdUser.uid,
+          email: createdUser.email
+        },
+      },
+      'shh',
+      {
+        issuer: 'auth.ix.com',
+        audience: 'ix.com',
+      },
+    );
 
-    // let createdUser = await this.userRepo.create(regUser);
-    // let jwt = sign(
-    //   {
-    //     user: {
-    //       id: createdUser.uid,
-    //       email: createdUser.email
-    //     },
-    //   },
-    //   'shh',
-    //   {
-    //     issuer: 'auth.ix.com',
-    //     audience: 'ix.com',
-    //   },
-    // );
-
-    // return {
-    //   token: jwt,
-    // };
-    return await this.userRepo.create(user);
+    return {
+      token: jwt,
+    };
+    // return await this.userRepo.create(user);
   }
 }
