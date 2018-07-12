@@ -37,12 +37,13 @@ export class LoginController {
 
     let foundUser = await this.userRepo.findOne({
       where: {
-        and: [{ email: user.email }, { password: user.password }],
+        email: user.email
       },
-    });
+    }) as User;
 
     let jwt = sign({
-      user: foundUser
+      id: foundUser.uid,
+      email: foundUser.email
     },
       'shh', {
         issuer: 'auth.hns.co.za',

@@ -38,9 +38,9 @@ exports.up = function (db, callback) {
 exports.down = function (db, callback) {
 
 
-  db.removeForeignKey('game_user_map', 'game_table', 'gameid_fk', callback)
+  db.removeForeignKey('game_user_map', 'gameid_fk', callback)
 
-  db.removeForeignKey('game_user_map', 'user_table', 'uid_fk', callback);
+  db.removeForeignKey('game_user_map', 'userid_fk', callback);
 };
 
 exports._meta = {

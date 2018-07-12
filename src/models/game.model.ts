@@ -17,13 +17,13 @@ export class Game extends Entity {
   @property({
     type: 'number',
   })
-  lng: number;
+  lng?: number;
 
   @property({
     type: 'number',
 
   })
-  lat: number;
+  lat?: number;
 
 
   getId() {
