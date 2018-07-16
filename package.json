@@ -31,7 +31,9 @@
     "test:dev": "lb-mocha --allow-console-logs DIST/test/**/*.js && npm run posttest",
     "prestart": "npm run build:current",
     "start": "node .",
-    "prepublishOnly": "npm run test"
+    "prepublishOnly": "npm run test",
+    "live": "node .",
+    "Billy": "export NODE_ENV=Billy && export DB_HOST=localhost && export DB_USER=root && export DB_PASSWORD='' && export DB_DATABASE=db"
   },
   "repository": {
     "type": "git"
@@ -54,8 +56,9 @@
     "@loopback/openapi-v3": "^0.10.12",
     "@loopback/repository": "^0.12.1",
     "@loopback/rest": "^0.15.1",
+    "@types/bcryptjs": "^2.4.1",
     "@types/jsonwebtoken": "^7.2.8",
-    "db-migrate-mysql": "^1.1.10",
+    "bcryptjs": "^2.4.3",
     "jsonwebtoken": "^8.3.0",
     "loopback-connector-mysql": "^5.2.0"
   },

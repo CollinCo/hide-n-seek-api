@@ -6,7 +6,7 @@ export declare class User extends Entity {
     lastname: string;
     email: string;
     password: string;
-    lng: number;
-    lat: number;
+    confirmpassword: string;
+    phone: string;
     getId(): any;
 }

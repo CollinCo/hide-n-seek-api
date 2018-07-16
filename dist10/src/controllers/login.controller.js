@@ -14,45 +14,55 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const repository_1 = require("@loopback/repository");
 const user_repository_1 = require("../repositories/user.repository");
-const models_1 = require("../models");
 const rest_1 = require("@loopback/rest");
 const jsonwebtoken_1 = require("jsonwebtoken");
+const models_1 = require("../models");
+// Uncomment these imports to begin using these cool features!
+// import {inject} from '@loopback/context';
 let LoginController = class LoginController {
     constructor(userRepo) {
         this.userRepo = userRepo;
     }
     verifyToken(jwt) {
         try {
-            let payload = jsonwebtoken_1.verify(jwt, "shh");
+            let payload = jsonwebtoken_1.verify(jwt, 'shh');
             return payload;
         }
         catch (err) {
             throw new rest_1.HttpErrors.Unauthorized("Invalid token");
         }
-        // The user is authenticated and we can process...
+        // The user is authenticated and we can process
     }
     async loginUser(user) {
         // Check that email and password are both supplied
         if (!user.email || !user.password) {
-            throw new rest_1.HttpErrors.Unauthorized('invalid credentials');
+            throw new rest_1.HttpErrors.Unauthorized('Missing input');
         }
         // Check that email and password are valid
         let userExists = !!(await this.userRepo.count({
-            and: [{ email: user.email }, { password: user.password }],
+            and: [
+                { email: user.email }
+            ],
         }));
-        if (!userExists) {
-            throw new rest_1.HttpErrors.Unauthorized('invalid credentials');
-        }
+        /* if (!userExists) {
+          throw new HttpErrors.Unauthorized('invalid credentials');
+        }; */
         let foundUser = await this.userRepo.findOne({
             where: {
-                and: [{ email: user.email }, { password: user.password }],
+                email: user.email
             },
         });
+        /* if (!(await bcrypt.compare(user.password, foundUser.password))) {
+          throw new HttpErrors.Unauthorized('invalid credentials');
+        } */
         let jwt = jsonwebtoken_1.sign({
-            user: foundUser
+            user: {
+                id: foundUser.user_id,
+                email: foundUser.email
+            }
         }, 'shh', {
-            issuer: 'auth.hns.co.za',
-            audience: 'hns.co.za'
+            issuer: 'auth.ix.co.za',
+            audience: 'ix.co.za'
         });
         return {
             token: jwt
@@ -60,8 +70,8 @@ let LoginController = class LoginController {
     }
 };
 __decorate([
-    rest_1.get("/verify"),
-    __param(0, rest_1.param.query.string("jwt")),
+    rest_1.get('/verify'),
+    __param(0, rest_1.param.query.string('jwt')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", void 0)
@@ -74,7 +84,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], LoginController.prototype, "loginUser", null);
 LoginController = __decorate([
-    __param(0, repository_1.repository(user_repository_1.UserRepository)),
+    __param(0, repository_1.repository(user_repository_1.UserRepository.name)),
     __metadata("design:paramtypes", [user_repository_1.UserRepository])
 ], LoginController);
 exports.LoginController = LoginController;

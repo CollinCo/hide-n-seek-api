@@ -17,7 +17,11 @@ export class Day_6Application extends BootMixin(
   RepositoryMixin(RestApplication)
 ) {
   constructor(options?: ApplicationConfig) {
-    super(options);
+    super({
+      rest: {
+        port: process.env.PORT || 3000
+      }
+    });
 
     // Set up the custom sequence
     this.sequence(MySequence);
@@ -33,18 +37,30 @@ export class Day_6Application extends BootMixin(
       },
     };
 
-    // Use below for an in-memory database
+    // Use below to add enviroment variables
+    //  var dataSourceConfig = new juggler.DataSource({
+    // name: "db",
+    // connector: "loopback-connector-mysql"
+    // host: process.env.DB.HOST
+    // host: process.env.DB.PORT
+    // host: process.env.DB.USER
+    // host: process.env.DB.DATABASE
+    // host: process.env.DB.PASSWORD
+
+
+
     var dataSourceConfig = new juggler.DataSource({
       name: "db",
       connector: 'loopback-connector-mysql',
       host: 'localhost',
       port: 3306,
-      database: 'hide_n_seek',
+      database: 'project',
       user: 'root',
-      password: 'root1234'
+      password: ''
     });
     this.dataSource(dataSourceConfig);
   }
+
 
   async start() {
     await super.start();

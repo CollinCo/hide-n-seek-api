@@ -9,7 +9,11 @@ const repository_1 = require("@loopback/repository");
 /* tslint:enable:no-unused-variable */
 class Day_6Application extends boot_1.BootMixin(repository_1.RepositoryMixin(rest_1.RestApplication)) {
     constructor(options) {
-        super(options);
+        super({
+            rest: {
+                port: process.env.PORT || 3000
+            }
+        });
         // Set up the custom sequence
         this.sequence(sequence_1.MySequence);
         this.projectRoot = __dirname;
@@ -22,15 +26,23 @@ class Day_6Application extends boot_1.BootMixin(repository_1.RepositoryMixin(res
                 nested: true,
             },
         };
-        // Use below for an in-memory database
+        // Use below to add enviroment variables
+        //  var dataSourceConfig = new juggler.DataSource({
+        // name: "db",
+        // connector: "loopback-connector-mysql"
+        // host: process.env.DB.HOST
+        // host: process.env.DB.PORT
+        // host: process.env.DB.USER
+        // host: process.env.DB.DATABASE
+        // host: process.env.DB.PASSWORD
         var dataSourceConfig = new repository_1.juggler.DataSource({
             name: "db",
             connector: 'loopback-connector-mysql',
             host: 'localhost',
             port: 3306,
-            database: 'hide_n_seek',
+            database: 'project',
             user: 'root',
-            password: 'root1234'
+            password: ''
         });
         this.dataSource(dataSourceConfig);
     }

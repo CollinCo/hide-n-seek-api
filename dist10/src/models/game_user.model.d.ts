@@ -4,8 +4,8 @@ export declare class GameUserMap extends Entity {
     userId: number;
     gameId: number;
     userStatus: string;
-    lng: number;
-    lat: number;
+    lng?: number;
+    lat?: number;
     role: string;
     timer: number;
     getId(): any;

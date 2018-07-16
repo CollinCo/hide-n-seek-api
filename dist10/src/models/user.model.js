@@ -56,16 +56,17 @@ __decorate([
 ], User.prototype, "password", void 0);
 __decorate([
     repository_1.property({
-        type: 'number',
+        type: 'string',
+        required: true,
     }),
-    __metadata("design:type", Number)
-], User.prototype, "lng", void 0);
+    __metadata("design:type", String)
+], User.prototype, "confirmpassword", void 0);
 __decorate([
     repository_1.property({
-        type: 'number',
+        type: 'string',
     }),
-    __metadata("design:type", Number)
-], User.prototype, "lat", void 0);
+    __metadata("design:type", String)
+], User.prototype, "phone", void 0);
 User = __decorate([
     repository_1.model()
 ], User);

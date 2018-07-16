@@ -14,47 +14,64 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const repository_1 = require("@loopback/repository");
 const user_repository_1 = require("../repositories/user.repository");
-const models_1 = require("../models");
 const rest_1 = require("@loopback/rest");
+const bcryptjs = require("bcryptjs");
+const models_1 = require("../models");
+// Uncomment these imports to begin using these cool features!
+// import {inject} from '@loopback/context';
 let RegistrationController = class RegistrationController {
     constructor(userRepo) {
         this.userRepo = userRepo;
     }
-    async registerUser(user) {
-        // let regUser = new User();
-        // regUser.firstname = user.firstname;
-        // regUser.lastname = user.lastname;
-        // regUser.email = user.email;
-        // regUser.password = user.password;
-        // let createdUser = await this.userRepo.create(regUser);
-        // let jwt = sign(
-        //   {
-        //     user: {
-        //       id: createdUser.uid,
-        //       email: createdUser.email
-        //     },
-        //   },
-        //   'shh',
-        //   {
-        //     issuer: 'auth.ix.com',
-        //     audience: 'ix.com',
-        //   },
-        // );
-        // return {
-        //   token: jwt,
-        // };
-        return await this.userRepo.create(user);
+    async createUser(user) {
+        if (!user.email || !user.password || !user.firstname || !user.lastname) {
+            throw new rest_1.HttpErrors.BadRequest('missing data');
+        }
+        // Check that user does not already exist
+        let userExists = !!(await this.userRepo.count({
+            and: [
+                { email: user.email }
+            ]
+        }));
+        if (userExists) {
+            throw new rest_1.HttpErrors.BadRequest('user already exists');
+        }
+        if (user.password === user.confirmpassword) {
+            let hashedPassword = await bcryptjs.hash(user.password, 10);
+            console.log(hashedPassword);
+            let createdUser = await this.userRepo.create({
+                email: user.email,
+                username: user.email,
+                firstname: user.firstname,
+                lastname: user.lastname,
+                phone: user.email,
+                password: user.password,
+                confirmpassword: user.confirmpassword,
+            });
+            console.log(createdUser);
+            let createUser = {
+                id: createdUser.uid,
+                email: createdUser.email,
+                firstname: createdUser.firstname,
+                lastname: createdUser.lastname,
+                phone: createdUser.phone
+            };
+            return createUser;
+        }
+        else {
+            throw new rest_1.HttpErrors.BadRequest('password does not match');
+        }
     }
 };
 __decorate([
-    rest_1.post('/registration'),
+    rest_1.post("/registration"),
     __param(0, rest_1.requestBody()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [models_1.User]),
     __metadata("design:returntype", Promise)
-], RegistrationController.prototype, "registerUser", null);
+], RegistrationController.prototype, "createUser", null);
 RegistrationController = __decorate([
-    __param(0, repository_1.repository(user_repository_1.UserRepository)),
+    __param(0, repository_1.repository(user_repository_1.UserRepository.name)),
     __metadata("design:paramtypes", [user_repository_1.UserRepository])
 ], RegistrationController);
 exports.RegistrationController = RegistrationController;
