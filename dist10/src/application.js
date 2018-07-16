@@ -27,17 +27,25 @@ class Day_6Application extends boot_1.BootMixin(repository_1.RepositoryMixin(res
             },
         };
         // Use below to add enviroment variables
-        //  var dataSourceConfig = new juggler.DataSource({
-        // name: "db",
-        // connector: "loopback-connector-mysql"
-        // host: process.env.DB.HOST
-        // host: process.env.DB.PORT
-        // host: process.env.DB.USER
-        // host: process.env.DB.DATABASE
-        // host: process.env.DB.PASSWORD
         var dataSourceConfig = new repository_1.juggler.DataSource({
             name: "db",
-            connector: 'memory',
+            connector: "loopback-connector-mysql",
+            host: process.env.DB_HOST,
+            port: process.env.DB_PORT,
+            user: process.env.DB_USER,
+            database: process.env.DB_DATABASE,
+            password: process.env.DB_PASSWORD
+            // var dataSourceConfig = new juggler.DataSource({
+            //   name: "db",
+            //   connector: 'memory',
+            // var dataSourceConfig = new juggler.DataSource({
+            //   name: "db",
+            //   connector: 'loopback-connector-mysql',
+            //   host: 'localhost',
+            //   port: 3306,
+            //   database: 'project',
+            //   user: 'root',
+            //   password: ''
         });
         this.dataSource(dataSourceConfig);
     }
