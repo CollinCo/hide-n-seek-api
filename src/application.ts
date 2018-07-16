@@ -48,15 +48,18 @@ export class Day_6Application extends BootMixin(
     // host: process.env.DB.PASSWORD
 
 
-
     var dataSourceConfig = new juggler.DataSource({
       name: "db",
-      connector: 'loopback-connector-mysql',
-      host: 'localhost',
-      port: 3306,
-      database: 'project',
-      user: 'root',
-      password: ''
+      connector: 'memory',
+
+      // var dataSourceConfig = new juggler.DataSource({
+      //   name: "db",
+      //   connector: 'loopback-connector-mysql',
+      //   host: 'localhost',
+      //   port: 3306,
+      //   database: 'project',
+      //   user: 'root',
+      //   password: ''
     });
     this.dataSource(dataSourceConfig);
   }
