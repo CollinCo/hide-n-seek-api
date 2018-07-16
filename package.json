@@ -32,8 +32,8 @@
     "prestart": "npm run build:current",
     "start": "node .",
     "prepublishOnly": "npm run test",
-    "live": "node .",
-    "Billy": "export NODE_ENV=Billy && export DB_HOST=localhost && export DB_USER=root && export DB_PASSWORD='' && export DB_DATABASE=db"
+    "live": "db-migrate up && node .",
+    "Billy": "export NODE_ENV=Billy && export DB_HOST=localhost && export DB_PORT=3306 && export DB_USER=root && export DB_PASSWORD='' && export DB_DATABASE=Hide-N-Seek"
   },
   "repository": {
     "type": "git"
@@ -58,6 +58,8 @@
     "@loopback/rest": "^0.15.1",
     "@types/bcryptjs": "^2.4.1",
     "@types/jsonwebtoken": "^7.2.8",
+    "db-migrate": "^0.11.1",
+    "db-migrate-mysql": "^1.1.10",
     "bcryptjs": "^2.4.3",
     "jsonwebtoken": "^8.3.0",
     "loopback-connector-mysql": "^5.2.0"
