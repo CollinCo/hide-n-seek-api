@@ -22,17 +22,18 @@ exports.up = function (db, callback) {
     {
       onDelete: 'CASCADE',
       onUpdate: 'RESTRICT'
-    }, callback);
-
-
-  db.addForeignKey('game_user_map', 'user', 'userid_fk',
-    {
-      'userid': 'uid'
     },
-    {
-      onDelete: 'CASCADE',
-      onUpdate: 'RESTRICT'
-    }, callback);
+    () => {
+      db.addForeignKey('game_user_map', 'user', 'userid_fk',
+        {
+          'userid': 'uid'
+        },
+        {
+          onDelete: 'CASCADE',
+          onUpdate: 'RESTRICT'
+        }, callback);
+    }
+  );
 };
 
 exports.down = function (db, callback) {
