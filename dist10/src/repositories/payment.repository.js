@@ -13,17 +13,18 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const repository_1 = require("@loopback/repository");
-const user_model_1 = require("../models/user.model");
 const core_1 = require("@loopback/core");
-let UserRepository = class UserRepository extends repository_1.DefaultCrudRepository {
+const loopback_datasource_juggler_1 = require("loopback-datasource-juggler");
+const payment_model_1 = require("../models/payment.model");
+let PaymentRepository = class PaymentRepository extends repository_1.DefaultCrudRepository {
     constructor(datasource) {
-        super(user_model_1.User, datasource);
+        super(payment_model_1.Payment, datasource); // links database to model
         this.datasource = datasource;
     }
 };
-UserRepository = __decorate([
+PaymentRepository = __decorate([
     __param(0, core_1.inject('datasources.db')),
-    __metadata("design:paramtypes", [repository_1.juggler.DataSource])
-], UserRepository);
-exports.UserRepository = UserRepository;
-//# sourceMappingURL=user.repository.js.map
+    __metadata("design:paramtypes", [loopback_datasource_juggler_1.DataSource])
+], PaymentRepository);
+exports.PaymentRepository = PaymentRepository;
+//# sourceMappingURL=payment.repository.js.map

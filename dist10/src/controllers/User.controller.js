@@ -45,7 +45,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "findUsersById", null);
 UserController = __decorate([
-    __param(0, repository_1.repository(user_repository_1.UserRepository)),
+    __param(0, repository_1.repository(user_repository_1.UserRepository.name)),
     __metadata("design:paramtypes", [user_repository_1.UserRepository])
 ], UserController);
 exports.UserController = UserController;
