@@ -38,19 +38,19 @@ export class Day_6Application extends BootMixin(
     };
 
     // Use below to add enviroment variables
-    var dataSourceConfig = new juggler.DataSource({
-      name: "db",
-      connector: "loopback-connector-mysql",
-      host: process.env.DB_HOST,
-      port: process.env.DB_PORT,
-      user: process.env.DB_USER,
-      database: process.env.DB_DATABASE,
-      password: process.env.DB_PASSWORD
-
-
     // var dataSourceConfig = new juggler.DataSource({
     //   name: "db",
-    //   connector: 'memory',
+    //   connector: "loopback-connector-mysql",
+    //   host: process.env.DB_HOST,
+    //   port: process.env.DB_PORT,
+    //   user: process.env.DB_USER,
+    //   database: process.env.DB_DATABASE,
+    //   password: process.env.DB_PASSWORD
+
+
+    var dataSourceConfig = new juggler.DataSource({
+      name: "db",
+      connector: 'memory',
 
 
       // var dataSourceConfig = new juggler.DataSource({
