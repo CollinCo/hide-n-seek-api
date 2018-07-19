@@ -49,6 +49,14 @@ class Day_6Application extends boot_1.BootMixin(repository_1.RepositoryMixin(res
         });
         this.dataSource(dataSourceConfig);
     }
+    // var dataSourceConfig = new juggler.DataSource({
+    //   name: "db",
+    //   connector: 'loopback-connector-mysql',
+    //   host: 'localhost',
+    //   port: 3306,
+    //   database: 'project',
+    //   user: 'root',
+    //   password: ''
     async start() {
         await super.start();
         const server = await this.getServer(rest_1.RestServer);

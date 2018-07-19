@@ -32,7 +32,8 @@
     "prestart": "npm run build:current",
     "start": "node .",
     "prepublishOnly": "npm run test",
-    "Billy": "export NODE_ENV=Billy && export DB_HOST=localhost && export DB_PORT=3306 && export DB_USER=root && export DB_PASSWORD='' && export DB_DATABASE=Hide-n-Seek && db-migrate up"
+    "live": "node .",
+    "Billy": "export NODE_ENV=Billy && export DB_HOST=localhost && export DB_PORT=3306 && export DB_USER=root && export DB_PASSWORD='' && export DB_DATABASE=project && db-migrate up && npm start"
   },
   "repository": {
     "type": "git"
